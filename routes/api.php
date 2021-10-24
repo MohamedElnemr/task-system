@@ -28,18 +28,29 @@ Route::group([
 
 ], function ($router) {
 
-Route::get('create-role',[AuthorizeController::class,'createRole'] );
 
-Route::get('create-permission', [AuthorizeController::class,'createPermission']);
 
-Route::get('perm-to-role', [AuthorizeController::class,'addPermissionToRole']);
 
-Route::get('assignRole', [AuthorizeController::class,'addRoleToUser']);
+
+
+
+
 
 Route::get('Test-permission',[AuthorizeController::class,'testPermission'] );
 
 });
 
+Route::get('allRoles',[AuthorizeController::class,'Roles'] );
+
+Route::get('allPermissions',[AuthorizeController::class,'permissions'] );
+
+Route::post('create-permission', [AuthorizeController::class,'createPermission']);
+
+Route::post('create-role',[AuthorizeController::class,'createRole'] );
+
+Route::get('perm-to-role', [AuthorizeController::class,'addPermissionToRole']);
+
+Route::get('assignRole', [AuthorizeController::class,'addRoleToUser']);
 
 
 Route::group([
@@ -66,7 +77,7 @@ Route::group([
 
 Route::get('users', [UserController::class,'index']);
 Route::post('users', [UserController::class,'store']);
-Route::get('users/{id}', [UserController::class,'show']);
+Route::post('users/{id}', [UserController::class,'show']);
 Route::get('users/{id}', [UserController::class,'update']);
 Route::get('users/{id}', [UserController::class,'destroy']);
 

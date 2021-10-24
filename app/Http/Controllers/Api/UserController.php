@@ -6,17 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Repository\I_User;
 
 class UserController extends Controller
 {
+
+    public $userRepo;
+
+    public function __construct(I_User $userRepo)
+    {
+        $this->userRepo = $userRepo;
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    // هنا لو مش عايز استخدم الكونستراكت هعمل الميثود بالشكل ده
+    // public function index(I_User $userRepo)
+    // {
+    //
+    //     return $userRepo->all();
+    // }
+
+
     public function index()
     {
-        return User::all();
+        // return User::all();
+        return $this->userRepo->all();
     }
 
     /**
@@ -36,8 +55,11 @@ class UserController extends Controller
         // return $user;
 
 
-        $user= User::create($request->all());
-        return $user;
+        // $user= User::create($request->all());
+        // return $user;
+
+        return $this->userRepo->saveUser($request);
+
     }
 
     /**
@@ -48,8 +70,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return $user;
+        // $user = User::find($id);
+        // return $user;
+
+        return $this->userRepo->showUser($id);
     }
 
     /**
